@@ -8,23 +8,26 @@ public class StringDemo {
         this.ITERATIONS = iterations;
     }
 
-    public static long measureStringConcatenation(int iterations) {
+    public void measureStringConcatenation() {
         long startTime = System.nanoTime();
         String result = "";
-        for (int i = 0; i < iterations; i++) {
-            result += "a";  // String concatenation
+        for (int i = 1; i < ITERATIONS; i++) {
+            result += i*i%(2*i);  // String concatenation
         }
         long endTime = System.nanoTime();
-        return endTime - startTime;
+        double timeInSeconds = (endTime - startTime) / 1_000_000_000.0;
+        System.out.println("Time taken for String concatenation: " + (timeInSeconds) + " seconds");
     }
 
-    public static long measureStringBuilder(int iterations) {
+    public void measureStringBuilder() {
         long startTime = System.nanoTime();
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < iterations; i++) {
-            sb.append("a");  // Using StringBuilder
+        for (int i = 1; i < ITERATIONS; i++) {
+            sb.append(i*i%(2*i));  // Using StringBuilder
         }
         long endTime = System.nanoTime();
-        return endTime - startTime;
+        double timeInSeconds = (endTime - startTime) / 1_000_000_000.0;
+
+        System.out.println("Time taken for StringBuilder: " + (timeInSeconds) + " seconds");
     }
 }
